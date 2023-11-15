@@ -1,6 +1,6 @@
 # go-doc Go语言编程阅读总结
 ## 1.
-![GO项目管理]([https://csdnimg.cn/cdn/content-toolbar/csdn-logo_.png?v=20190924.1 "CSDN图标"](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bd7b248fc6864f95b191b059133b947b~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bd7b248fc6864f95b191b059133b947b~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
+![CSDN图标](https://csdnimg.cn/cdn/content-toolbar/csdn-logo_.png?v=20190924.1 "CSDN图标")
 * Go应用
 /web
 前端代码存放目录。
