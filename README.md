@@ -1,33 +1,29 @@
 # go-doc Go语言编程阅读总结
-## 1.
-![GO](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bd7b248fc6864f95b191b059133b947b~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
-* Go应用
-/web
+## 1.go项目目录结构
+* [原文地址](https://juejin.cn/post/7103440474152632328)
+* ![GO](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bd7b248fc6864f95b191b059133b947b~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
+* Go package分类
+* 1./web
 前端代码存放目录。
 存放Web 应用程序特定的组件：主要有静态 Web 资源，服务器端模板和单页应用（Single-Page App，SPA）等。
-
-/cmd
+* 2./cmd
 存放当前项目的可执行文件。
 cmd 目录下的每一个子目录名称都应该匹配可执行文件。例如，把组件 main 函数所在的文件夹统一放在 /cmd 目录下。
 不要在 /cmd 目录中放置太多的代码，我们应该将公有代码放置到 /pkg 中，将私有代码放置到 /internal 中并在 /cmd 中引入这些包，保证 main 函数中的代码尽可能简单和少。
-
-/internal
+* 3./internal
 存放私有应用和库代码。
 如果一些代码，你不希望被其他项目/库导入，可以将这部分代码放至/internal目录下。一般存储一些比较专属于当前项目的代码包。这是在代码编译阶段就会被限制的，该目录下的代码不可被外部访问到。一般有以下子目录：
-
-/router 路由
-/application 存放命令与查询
-
-/command
+* 4./router
+路由
+* 5./application
+存放命令与查询
+* 6./command
 query
-
-
-/middleware 中间件
-/model 模型定义
-/repository 仓储层，封装数据库操作
-/response 响应
-/errmsg 错误处理
-
+* 7./middleware 中间件
+* 8./model 模型定义
+* 9./repository 仓储层，封装数据库操作
+* 10./response 响应
+* 11./errmsg 错误处理
 
 在/internal目录下应存放每个组件的源码目录，当项目变大、组件增多时，扔可以将新增的组件代码存放到/internal目录下
 internal目录并不局限在根目录，在各级子目录中也可以有internal子目录，也会同样起到作用。
@@ -109,7 +105,3 @@ Go会忽略.或_开头的目录或文件
 /githooks
 Git 钩子。
 
-作者：沥沥樱
-链接：https://juejin.cn/post/7103440474152632328
-来源：稀土掘金
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
