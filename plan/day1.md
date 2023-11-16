@@ -7,6 +7,7 @@
 * 以 2 week 为一个周期，确定大致的学习方向
 ## daily part1
 * 今天主要学习了一些dockerfile,makefile的知识，对原先写的mqtt服务器按更加标准的工程方式进行重构
+* ![项目目录](image/1.jpeg)
 ## daily part2
 * dokerfile WORKDIR是构建image的地址
 * 而不是当前目录 copy 文件地址 image地址
