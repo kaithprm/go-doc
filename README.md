@@ -68,8 +68,47 @@ Go会忽略.或_开头的目录或文件
 		命令2
 		. . .
 * 目标target是文件名，以空格分隔，通常每个规则只有一个
-* 命令command是生成目标的一系列步骤，以制表符开头，不能以空格开头
+* 命令command是生成目标的一系列步骤，**以制表符开头**，不能以空格开头
 * 依赖项prerequisites是文件名 这些文件需要在执行命令之前存在
 * build: 
 *	go build -ldflags "-X main.version=$(version)"版本名 -o 输出地址 输入地址
+## 三、Dockerfile
+### 关于docker
+* 1.docker的主要目的是**容器化**，也就是为应用程序提供一致环境，而不依赖运行它们的主机
+* 2.主要步骤分为：1.创建docker镜像(image)，2.编写dockerfile：为了创建image而编写的配置文件
+### Dockerfile关键字
+'''
+FROM golang:alpine
+
+# 为我们的镜像设置必要的环境变量
+ENV GO111MODULE=on \
+    CGO_ENABLED=0 \
+    GOOS=linux \
+    GOARCH=amd64
+
+# 移动到工作目录：/build
+WORKDIR /build
+
+# 将代码复制到容器中
+COPY . .
+
+# 将我们的代码编译成二进制可执行文件app
+RUN go build -o app .
+
+# 移动到用于存放生成的二进制文件的 /dist 目录
+WORKDIR /dist
+
+# 将二进制文件从 /build 目录复制到这里
+RUN cp /build/app .
+
+# 声明服务端口
+EXPOSE 8888
+
+# 启动容器时运行的命令
+
+'''
+*
+* 
+
+
 
