@@ -77,7 +77,7 @@ Go会忽略.或_开头的目录或文件
 * 1.docker的主要目的是**容器化**，也就是为应用程序提供一致环境，而不依赖运行它们的主机
 * 2.主要步骤分为：1.创建docker镜像(image)，2.编写dockerfile：为了创建image而编写的配置文件
 ### Dockerfile关键字
-'''
+```
 FROM golang:alpine
 
 # 为我们的镜像设置必要的环境变量
@@ -105,9 +105,8 @@ RUN cp /build/app .
 EXPOSE 8888
 
 # 启动容器时运行的命令
-
-'''
-*
+```
+* From正在使用基础镜像golang:alpine来创建镜像。
 * 
 
 
