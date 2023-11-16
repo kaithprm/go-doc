@@ -67,5 +67,9 @@ Go会忽略.或_开头的目录或文件
 		命令1
 		命令2
 		. . .
-
+* 目标target是文件名，以空格分隔，通常每个规则只有一个
+* 命令command是生成目标的一系列步骤，以制表符开头，不能以空格开头
+* 依赖项prerequisites是文件名 这些文件需要在执行命令之前存在
+* build: 
+*	go build -ldflags "-X main.version=$(version)"版本名 -o 输出地址 输入地址
 
