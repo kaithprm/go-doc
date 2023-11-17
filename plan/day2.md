@@ -27,3 +27,5 @@ func Delete(){}
 * web与mqtt创建为两个项目，两个项目分别启动两个mysql服务即可，在mqtt端关闭对数据库的增删改即没有数据不一致等问题
 * web端提供一个register button
 # day2 part3
+* 应该还是优先后端程序的设计，web可以安排到最后
+* 学习一下etcd和rpc基础原理
