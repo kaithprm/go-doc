@@ -11,3 +11,7 @@
 * 云管理平台、监控平台、日志管理平台，需要他们支持
 * 服务管理平台，测试发布平台
 * 服务治理平台
+# RPC
+关于RPC与protocol的理解:RPC是实现远程方法调用 而protocol是调用方与被调用方交互的一种序列化形式
+# protocol
+* [](https://blog.csdn.net/qq_31347869/article/details/93189219)
