@@ -1,5 +1,5 @@
 # daily part1
-
+更新了installer手册，使用了RPC基础功能
 # daily part2
 ## 使用RPC有以下几个重要规则：
 * 1.结构体字段首字母要大写，可以别人调用。**注：结构体中的参数同样需要大写**
@@ -20,4 +20,7 @@
 # 关于RPC的理解
 * 关于RPC协议 所谓的远程方法调用 看起来只是把调用方Client的参数传给被调用方Server执行方法后传回，如下图
 * ![RPC](image/2.jpeg)
+* 那么实现跨语言是不是只要使用统一序列化就可以解决了呢 -- protocol
 # daily part3
+* 使用gRPC框架
+* 与protocol合并使用
