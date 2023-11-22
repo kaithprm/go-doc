@@ -19,5 +19,5 @@
 * 3.安全性：HTTP协议可以通过HTTPS进行加密传输，提供一定的安全性。而其他协议可能有自己的安全机制，例如gRPC使用TLS进行传输加密。
 # 关于RPC的理解
 * 关于RPC协议 所谓的远程方法调用 看起来只是把调用方Client的参数传给被调用方Server执行方法后传回，如下图
-![RPC](image/2.jpg)
+![RPC](plan/image/2.jpeg)
 # daily part3
