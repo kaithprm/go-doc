@@ -2,7 +2,7 @@
 
 # daily part2
 ## 关于服务发现，服务注册
-* ！[image](https://pic4.zhimg.com/80/v2-636cdc84e5139cf5380dd38c88c03b97_720w.webp)
+* ![!image](https://pic4.zhimg.com/80/v2-636cdc84e5139cf5380dd38c88c03b97_720w.webp)
 * 注册中心，用于服务端注册远程服务以及客户端发现服务 zookeeper/etcd..
 * 服务端，对外提供后台服务，将自己的服务信息注册到注册中心
 * 客户端，从注册中心获取远程服务的注册信息，然后进行远程过程调用
