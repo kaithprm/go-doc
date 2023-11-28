@@ -22,7 +22,8 @@ service UserInfoService{
 }
 ```
 ## 编写server和client
-*server端 ```
+*server端 
+```
   type server struct {
 	pb.UnimplementedUserInfoServiceServer // !!必须嵌入 UnimplementedUserInfoServiceServer 才能实现向前兼容。就是说必须嵌入该方法才能继承接口
 }
@@ -54,10 +55,10 @@ func main() {
 	pb.RegisterUserInfoServiceServer(s, &u)
 	s.Serve(listener)
 }
+ ```
 
-  ```
-
-* client端```
+* client端
+```
 func main() {
 	conn, err := grpc.Dial("127.0.0.1:8080", grpc.WithInsecure())
 	if err != nil {
@@ -74,7 +75,6 @@ func main() {
 	fmt.Printf("响应结果： %v\n", response)
 
 }
-
 ```
 # daily part3
 实现与js交互，写持久层逻辑
