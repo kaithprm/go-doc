@@ -22,13 +22,13 @@ message UserResponse{
 * 跨平台和语言支持：HTTP协议是一种跨平台和语言无关的协议，任何支持HTTP协议的平台和编程语言都可以使用HTTP进行通信。这使得基于HTTP的RPC通信可以在不同的平台和使用不同编程语言的应用程序之间进行通信。
 ### 原生rpc没有像grpc框架一样建立在tcp协议上而是要在封装一层http?
 * 因为原生的net/rpc库是在Go语言的标准库中提供的，而Go语言标准库中的net/http包提供了HTTP服务器和客户端的实现，因此使用HTTP作为底层协议更加方便和简易。
-### net/rpc 注册源码
+### net/rpc **服务端**的注册源码
 ```
 func (server *Server) register(rcvr any, name string, useName bool) error {
 	s := new(service)
-	s.typ = reflect.TypeOf(rcvr)
-	s.rcvr = reflect.ValueOf(rcvr)
-	sname := name
+	s.typ = reflect.TypeOf(rcvr)  //保存对象的type
+	s.rcvr = reflect.ValueOf(rcvr) //保存对象的value
+	sname := name //保存对象的名称
 	if !useName {
 		sname = reflect.Indirect(s.rcvr).Type().Name()
 	}
@@ -68,4 +68,4 @@ func (server *Server) register(rcvr any, name string, useName bool) error {
 }
 ```
 # daily part3
-继续了解rpc协议底层，搞清楚每一步的意义，如何实现的
+继续了解rpc协议底层，搞清楚每一步的意义，如何实现的，仔细看一下注册代码
