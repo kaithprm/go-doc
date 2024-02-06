@@ -45,7 +45,6 @@ func main() {
 ```
 * 3.实现容器/组合
 ```
-
 // 返回了一个handlerImp类型的实例，这是组合模式中的组合对象
 func NewHandlerImp() handlerImp {
 	return handlerImp{
@@ -76,5 +75,20 @@ func (imp handlerImp) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	return
 }
-
 ```
+## 使用go http/template库 渲染html
+* 直接将tmpl文件写入叶对象即可，只需要两步
+* 1.解析模板
+```
+		tmpl, err := template.ParseFiles("D:\\Develop\\gopath\\book-manager\\web\\test.tmpl")
+		if err != nil {
+			fmt.Println("create template failed, err:", err)
+			return
+		}
+```
+* 2.可以给定数据渲染模板(应该也可以由result api操作)
+```
+		tmpl.Execute(w, "小明")
+```
+
+
