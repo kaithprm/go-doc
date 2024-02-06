@@ -90,5 +90,21 @@ func (imp handlerImp) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 ```
 		tmpl.Execute(w, "小明")
 ```
-
+* tmpl
+```
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=devie-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hello</title>
+</head>
+<body>
+    <p>Hello {{.}}<p> #此处是渲染目标
+</body>
+<html>
+```
+* copy了一个登录html，等后期再修改
+## 持久层设计
 
