@@ -28,11 +28,13 @@ func main() {
 * 	2.组合模式还符合开闭原则，不用修改原本的代码就可以添加新功能
 * ![组合模式](image/1.jpeg)
 * 结构：
-* ————handler
-*          ————method
-*          ————path
-*                ————/test
-*                ————/login
+```
+ ————handler
+          ————method
+          ————path
+                ————/test
+                ————/login
+```
 * 1.定义抽象组件接口 包含了对路径和HTTP方法的处理程序的存储和调用逻辑。
 ```
 type handlerImp struct {
