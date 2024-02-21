@@ -157,3 +157,7 @@ func (imp handlerImp) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 * mysql
 
 * 验证
+
+### token
+
+### cookie
