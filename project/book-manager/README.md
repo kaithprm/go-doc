@@ -120,5 +120,39 @@ func (imp handlerImp) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 * copy了一个登录html，等后期再修改
 ## 2.登录模块设计
 ### 登录认证
+#### 1.处理表单输入
+* login.tmpl
+```
+<head>
+<title></title>
+</head>
+<body>
+<form action="http://127.0.0.1:8080/test" method="post">
+    用户名:<input type="text" name="username">
+    密码:<input type="password" name="password">
+    <input type="submit" value="登陆">
+</form>
+</body>
+</html>
+```
+* 提交表单方法为post Handler里面是不会自动解析form的，必须显式的调用r.ParseForm()后才能对表单进行操作
+* 当这个地址GET方法时渲染tmpl
+```
+	if r.Method == "GET" {
+			tmpl, err := template.ParseFiles("D:\\Develop\\gopath\\book-manager\\web\\test.tmpl")
+			if err != nil {
+				fmt.Println("create template failed, err:", err)
+				return
+			}
+			// 利用给定数据渲染模板, 并将结果写入w
+			tmpl.Execute(w, nil)
+		} else {
+			r.ParseForm()
+			//请求的是登陆数据，那么执行登陆的逻辑判断
+			fmt.Println("username:", r.Form["username"])
+			fmt.Println("password:", r.Form["password"])}
+```
+#### 2.验证表单的输入
+* mysql
 
-
+* 验证
