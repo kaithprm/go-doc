@@ -152,6 +152,7 @@ func (imp handlerImp) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			fmt.Println("username:", r.Form["username"])
 			fmt.Println("password:", r.Form["password"])}
 ```
+* ![gif-test](image/1.gif)
 #### 2.验证表单的输入
 * mysql
 
