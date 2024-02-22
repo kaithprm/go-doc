@@ -191,7 +191,14 @@ func login(w http.ResponseWriter, r *http.Request) {
 ```
 * ![token](image/2.jpeg)
 * 当刷新时可以看到这个值在不断的变化。这样就保证了每次显示form表单的时候都是唯一的，用户递交的表单保持了唯一性。
-### cookie
+### Session与Cookie
+* 因为Http协议是无状态的，所以用户的每一次请求也是无状态的，为解决web操作中哪些连接与用户有关问题--使用了Seesion与Cookie机制
+* Session机制是服务器机制，服务器用一种类似散列表的结构保存信息，每个访客会被分配一个唯一的标识符--sessionID(可以用url传递/保存在客户端的cookie/保存在数据库)
+* Session的概念:在服务器上保存用户操作的历史信息
+* Cookie机制是一种客户端机制，把用户数据保存在客户端
+* Cookie的概念:保存一些用户操作的历史信息(登录信息等)并在该用户再次访问站点时浏览器通过HTTP协议将本地cookie内容发送给服务器，从而完成验证
+#### 设置Cookie
+
 
 ## 持久层设计
 ### MySQL
