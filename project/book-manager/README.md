@@ -159,5 +159,36 @@ func (imp handlerImp) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 * 验证
 
 ### token
+#### 设置token目的：
+* 防止重复提交表单--作为一个带有唯一值的隐藏字段
+* token通过MD5(时间戳)来获取唯一值,然后将这个值保存在服务端session来控制
+```
+func login(w http.ResponseWriter, r *http.Request) {
+    fmt.Println("method:", r.Method) //获取请求的方法
+    if r.Method == "GET" {
+        crutime := time.Now().Unix()
+        h := md5.New()
+        io.WriteString(h, strconv.FormatInt(crutime, 10))
+        token := fmt.Sprintf("%x", h.Sum(nil))
 
+        t, _ := template.ParseFiles("login.gtpl")
+        t.Execute(w, token)
+    } else {
+        //请求的是登陆数据，那么执行登陆的逻辑判断
+        r.ParseForm()
+        token := r.Form.Get("token")
+        if token != "" {
+            //验证token的合法性
+        } else {
+            //不存在token报错
+        }
+        fmt.Println("username length:", len(r.Form["username"][0]))
+        fmt.Println("username:", template.HTMLEscapeString(r.Form.Get("username"))) //输出到服务器端
+        fmt.Println("password:", template.HTMLEscapeString(r.Form.Get("password")))
+        template.HTMLEscape(w, []byte(r.Form.Get("username"))) //输出到客户端
+    }
+}
+```
+* ![token](image/2.jpeg)
+* 当刷新时可以看到这个值在不断的变化。这样就保证了每次显示form表单的时候都是唯一的，用户递交的表单保持了唯一性。
 ### cookie
