@@ -22,7 +22,7 @@ func main() {
 ```
 * 设置路由的方法：在ServerHTTP中加入if r.URL.PATH == "/test"
 * 当有多个路由或接口方法时，所有的执行逻辑都要通过ServeHTTP来完成，违反了高内聚低耦合
-* 组合设计模式：
+### 组合设计模式：
 * 概念：组合模式是一种结构型的设计模式，你可以使用它将对象组合成树状结构，并且能像使用独立对象一样使用他们（指组合体）
 * 优势：1.将类与对象组装成一个较大的结构并同时保持结构的灵活与高效性
 * 	2.组合模式还符合开闭原则，不用修改原本的代码就可以添加新功能
@@ -35,14 +35,14 @@ func main() {
                 ————/test
                 ————/login
 ```
-* 1.定义抽象组件接口 包含了对路径和HTTP方法的处理程序的存储和调用逻辑。
+#### 1.定义抽象组件接口 包含了对路径和HTTP方法的处理程序的存储和调用逻辑。
 ```
 type handlerImp struct {
 	pathHandlers   map[string]http.Handler
 	methodHandlers map[string]http.Handler
 }
 ```
-* 2.实现叶子对象
+#### 2.实现叶子对象
 ```
 func main() {
 	
@@ -55,7 +55,7 @@ func main() {
 }
 
 ```
-* 3.实现容器/组合
+#### 3.实现容器/组合
 ```
 // 返回了一个handlerImp类型的实例，这是组合模式中的组合对象
 func NewHandlerImp() handlerImp {
@@ -192,3 +192,6 @@ func login(w http.ResponseWriter, r *http.Request) {
 * ![token](image/2.jpeg)
 * 当刷新时可以看到这个值在不断的变化。这样就保证了每次显示form表单的时候都是唯一的，用户递交的表单保持了唯一性。
 ### cookie
+
+## 持久层设计
+###
