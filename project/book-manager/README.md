@@ -194,4 +194,40 @@ func login(w http.ResponseWriter, r *http.Request) {
 ### cookie
 
 ## 持久层设计
-###
+### MySQL
+``` mysql.go
+var db *sqlx.DB
+
+type User struct {
+	Username string
+	Password string
+}
+
+// InitDB 初始化数据库
+func InitDB() (err error) {
+	dsn := "root:123456@tcp(127.0.0.1:3306)/gotest"
+	db, err = sqlx.Connect("mysql", dsn)
+	if err != nil {
+		fmt.Printf("connect DB failed, err:%v\n", err)
+		return
+	}
+	db.SetMaxOpenConns(20) //设置最大连接数
+	db.SetMaxIdleConns(10) //数据库连接池中的空闲连接数的最大值
+	return
+}
+
+// QueryAlllUser 查询所有用户
+func QueryAlllUser() (userList []*User, err error) {
+
+	sqlStr := "select username,password from user"
+
+	err = db.Select(&userList, sqlStr)
+	if err != nil {
+		fmt.Printf("查询信息失败err=%v\n", err)
+		return
+	}
+
+	return
+}
+```
+### NoSQL
