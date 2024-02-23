@@ -7,7 +7,7 @@ http.ListenAndServe(":8080", handler)
 ### 关于handler
 * 设置handler就是设置处理的程序
 * 定义handler仅需要实现ServeHTTP(ResponseWriter, *Request)接口即可
-```
+``` go
 // 设置handler
 type handlerImp struct {
 }
@@ -36,14 +36,14 @@ func main() {
                 ————/login
 ```
 #### 1.定义抽象组件接口 包含了对路径和HTTP方法的处理程序的存储和调用逻辑。
-```
+``` go
 type handlerImp struct {
 	pathHandlers   map[string]http.Handler
 	methodHandlers map[string]http.Handler
 }
 ```
 #### 2.实现叶子对象
-```
+``` go
 func main() {
 	
 	handler := NewHandlerImp()
@@ -56,7 +56,7 @@ func main() {
 
 ```
 #### 3.实现容器/组合
-```
+``` go
 // 返回了一个handlerImp类型的实例，这是组合模式中的组合对象
 func NewHandlerImp() handlerImp {
 	return handlerImp{
@@ -87,11 +87,11 @@ func (imp handlerImp) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	return
 }
-```
+``` 
 ## 使用go http/template库 渲染html
 * 直接将tmpl文件写入叶对象即可，只需要两步
 * 1.解析模板
-```
+``` go
 		tmpl, err := template.ParseFiles("D:\\Develop\\gopath\\book-manager\\web\\test.tmpl")
 		if err != nil {
 			fmt.Println("create template failed, err:", err)
@@ -99,11 +99,11 @@ func (imp handlerImp) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 ```
 * 2.可以给定数据渲染模板(应该也可以由result api操作)
-```
+``` go
 		tmpl.Execute(w, "小明")
 ```
 * tmpl
-```
+``` html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -122,7 +122,7 @@ func (imp handlerImp) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 ### 登录认证
 #### 1.处理表单输入
 * login.tmpl
-```
+``` html
 <head>
 <title></title>
 </head>
@@ -137,7 +137,7 @@ func (imp handlerImp) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 ```
 * 提交表单方法为post Handler里面是不会自动解析form的，必须显式的调用r.ParseForm()后才能对表单进行操作
 * 当这个地址GET方法时渲染tmpl
-```
+``` go
 	if r.Method == "GET" {
 			tmpl, err := template.ParseFiles("D:\\Develop\\gopath\\book-manager\\web\\test.tmpl")
 			if err != nil {
@@ -162,7 +162,7 @@ func (imp handlerImp) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 #### 设置token目的：
 * 防止重复提交表单--作为一个带有唯一值的隐藏字段
 * token通过MD5(时间戳)来获取唯一值,然后将这个值保存在服务端session来控制
-```
+``` go
 func login(w http.ResponseWriter, r *http.Request) {
     fmt.Println("method:", r.Method) //获取请求的方法
     if r.Method == "GET" {
@@ -200,7 +200,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 #### 设置Cookie
 * 一个cookie的误区：所谓的用户数据存储在客户端中指的是存储在客户端的浏览器中 是用HTTP响应头中的Set-Cookie字段后浏览器会自动的将这些数据存储在本地 而不是用io操作等存储在用户端的内存或硬盘中
 * cookie struct && cokie 设置及获取
-```
+``` go
 type Cookie struct {
 	Name       string // 用于标识cookie
 	Value      string
