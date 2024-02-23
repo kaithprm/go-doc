@@ -198,8 +198,59 @@ func login(w http.ResponseWriter, r *http.Request) {
 * Cookie机制是一种客户端机制，把用户数据保存在客户端
 * Cookie的概念:保存一些用户操作的历史信息(登录信息等)并在该用户再次访问站点时浏览器通过HTTP协议将本地cookie内容发送给服务器，从而完成验证
 #### 设置Cookie
+* 一个cookie的误区：所谓的用户数据存储在客户端中指的是存储在客户端的浏览器中 是用HTTP响应头中的Set-Cookie字段后浏览器会自动的将这些数据存储在本地 而不是用io操作等存储在用户端的内存或硬盘中
+* cookie struct && cokie 设置及获取
+```
+type Cookie struct {
+	Name       string // 用于标识cookie
+	Value      string
+	Path       string    // cookie作用的路径
+	Domain     string    // 作用域
+	Expires    time.Time // 过期时间
+	RawExpires string
 
+	// MaxAge=0 means no 'Max-Age' attribute specified.
+	// MaxAge<0 means delete cookie now, equivalently 'Max-Age: 0'
+	// MaxAge>0 means Max-Age attribute present and given in seconds
+	MaxAge   int
+	Secure   bool
+	HttpOnly bool
+	Raw      string
+	Unparsed []string // Raw text of unparsed attribute-value pairs
+}
 
+// Set Cookie
+cookie := http.Cookie{
+    Name:     "_cookie",
+    Value:    session.Uuid,
+    HttpOnly: true,
+    Path: "/",
+}
+http.SetCookie(writer, &cookie)
+http.Redirect(writer, request, "/", 302)
+w.Header().Add("Set-Cookie", cookie.String())
+
+// Get Cookie
+cookie := r.Header.Get("Cookie")
+
+or
+
+func GetCookie(w http.ResponseWriter, r *http.Request)  {
+    c1, err := r.Cookie("username")
+    if err != nil {
+        fmt.Fprintln(w, "名为 username 的 Cookie 不存在")
+        return
+    }
+    username, _ := url.QueryUnescape(c1.Value)
+    c2, err := r.Cookie("website")
+    if err != nil {
+        fmt.Fprintln(w, "名为 website 的 Cookie 不存在")
+        return
+    }
+    website := c2.Value
+    fmt.Fprintf(w, "从用户请求中读取的 Cookie: {username: %s, website: %s}\n", username, website)
+}
+```
 ## 持久层设计
 ### MySQL
 ``` mysql.go
