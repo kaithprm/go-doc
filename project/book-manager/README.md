@@ -1,6 +1,6 @@
 # 用go语言实现一个图书管理系统过程
 ## 1.http server搭建
-```
+``` go
 http.ListenAndServe(":8080", handler)
 ```
 * 该方法完成监听端口(listen)并处理进入端口的连接(serve)
