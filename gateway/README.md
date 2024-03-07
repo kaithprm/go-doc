@@ -335,5 +335,7 @@ func ExampleServiceClient_GetAllService(client naming_client.INamingClient, para
 	service, _ := client.GetAllServicesInfo(param)
 	fmt.Printf("获取所有服务:%+v, result:%+v \n\n", param, service)
 }
-
 ```
+## 网关实现
+### 1.实现反向代理
+* 连接nacos，根据name获取ip
