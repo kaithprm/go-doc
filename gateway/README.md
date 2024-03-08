@@ -19,6 +19,10 @@ docker run --name nacos -d \
 -e MODE=standalone \
 nacos/nacos-server
 ```
+* 4.再次启动
+```shell
+docker start -a nacos
+```
 ### 2.注册服务
 * 1.注册服务代码
 ```go
