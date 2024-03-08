@@ -1,4 +1,10 @@
 # api gateway
+## 开发需求
+* 1.路由管理
+* 2.请求转发
+* 3.负载均衡(未开始)
+* 4.黑白名单(未开始)
+* 5.日志管理(未开始)
 ## 实现网关前的准备 
 ### 1.使用docker搭建本地nacos
 * 1.拉取nacos镜像
@@ -24,7 +30,12 @@ nacos/nacos-server
 docker start -a nacos
 ```
 ### 2.注册服务
-* 1.注册服务demo.go
-## 网关实现
-### 1.实现反向代理
-* 连接nacos，根据name获取ip
+* 1.使用nacos注册工具 注册服务demo.go
+## 网关代码实现
+### 1.连接数据库 查询记录的route与service_name对应关系，得到service_name
+### 2.连接nacos 根据service_name 查询对应IP,Port
+### 3.跳转操作(后续如果是内网服务 可以转为proxy)
+* ![流程图](image/1.jpeg)
+
+## 接口设计
+* 目前的接口 post /test --> demo.go
