@@ -34,6 +34,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 ```
 * 2.在yml地址下执行以下命令:
-```
+```shell
 docker-compose up -d reverse-proxy
 ```
+* 3.验证
+```
+http://localhost:8080/api/rawdata
+```
+
