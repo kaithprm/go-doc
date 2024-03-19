@@ -41,4 +41,23 @@ docker-compose up -d reverse-proxy
 ```
 http://localhost:8080/api/rawdata
 ```
+## k3s设置
+## 安装
+* 1.运行安装版本
+```shell
+curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
+```
+* 2.初始化脚本
+```shell
+curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn K3S_URL=https://myserver:6443 K3S_TOKEN=mynodetoken sh -
+```
+## 问题
+* 使用kubectl get pod验证时 显示api server无法访问
+* 解决方法:可能是由于初始化时没完全启动k3s组件，使用以下步骤重启k3s后该问题不再存在
+```shell
+sudo k3s-killall.sh
+```
+```shell
+sudo k3s server
+```
 
