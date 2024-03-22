@@ -13,7 +13,7 @@
 ### 前置软件
 * docker
 * docker-compose
-## 安装
+### 安装
 * 1.创建docker-compose.yml文件，复制以下内容:
 ```yml
 version: '3'
@@ -41,6 +41,11 @@ docker-compose up -d reverse-proxy
 ```
 http://localhost:8080/api/rawdata
 ```
+### 组件
+### 创建路由规则
+* 1.原生Ingress写法
+* 2.使用CRD IngressRoute方式
+* 3.使用GatewayAPI的方式
 ## k3s设置
 ## 安装
 * 1.运行安装版本
@@ -60,4 +65,16 @@ sudo k3s-killall.sh
 ```shell
 sudo k3s server
 ```
-
+## K3s资源
+一些资源的解释
+### 工作负载型资源(workload):
+* Pods：最小的部署单位，每个Pod包含一个或多个容器。
+* 部署（Deployments）：管理Pod的创建和更新。
+### 服务发现及负载均衡型资源(ServiceDiscoveryLoadBalance): 
+* 服务（Services）：定义了如何访问Pod，例如负载均衡和服务发现。
+### 集群级资源：
+* 节点（Nodes）：集群的物理或虚拟机器。
+* Namespace
+* ClusterRole：角色 用来绑定到应用程序来进行权限管理
+### 特殊类型的存储卷
+* ConfigMap : 当配置中心来使用的资源类型
