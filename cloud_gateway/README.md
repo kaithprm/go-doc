@@ -89,7 +89,24 @@ spec:
         port: 80 
 ```
 * 6.定义入口点（端口号和对应的端口名称）
-启动 Traefik 时会定义入口点（端口号和对应的端口名称），这时 Kubernetes 集群外部就可以通过访问 Traefik 服务器地址和配置的入口点对 Traefik 服务进行访问。在访问时一般会带上“域名”+“入口点端口”，然后 Traefik 会根据域名和入口点端口在 Traefik 路由规则表中进行匹配，如果匹配成功，则将流量发送到 Kubernetes 内部应用中与外界进行交互。其中，域名与入口点与对应后台服务关联的规则，即是 Traefik 路由规则。
+* 启动 Traefik 时会定义入口点（端口号和对应的端口名称），这时 Kubernetes 集群外部就可以通过访问 Traefik 服务器地址和配置的入口点对 Traefik 服务进行访问。在访问时一般会带上“域名”+“入口点端口”，然后 Traefik 会根据域名和入口点端口在 Traefik 路由规则表中进行匹配，如果匹配成功，则将流量发送到 Kubernetes 内部应用中与外界进行交互。其中，域名与入口点与对应后台服务关联的规则，即是 Traefik 路由规则。
+* Traefik 对接更多提供者（注册中心）
+```
+additionalArguments:
+  - "--providers.consulcatalog=true"
+  - "--providers.consulcatalog.endpoint.address=10.97.117.24"
+ports:
+  traefik:
+    expose: true
+  web:
+    nodePort: 80
+  websecure:
+    nodePort: 443
+```
+* 使用 helm 更新 traefik
+```shell
+helm upgrade --install traefik traefik/traefik -n traefik -f traefik-config.yaml
+```
 ### 组件
 ### 创建路由规则
 * 1.原生Ingress写法
