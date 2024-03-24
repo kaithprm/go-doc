@@ -41,6 +41,55 @@ docker-compose up -d reverse-proxy
 ```
 http://localhost:8080/api/rawdata
 ```
+* 4.部署service
+```yaml
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: whoami
+  labels:
+    app: whoami
+spec:
+  containers:
+    - name: whoami
+      image: traefik/whoami:latest
+      ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: whoami
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: whoami
+  type: ClusterIP
+```
+* 5.创建路由规则
+* 创建完路由规则后外部可以访问 通过扩展CRD的方式来扩展
+```yaml
+# cat ingressroute.yaml 
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: whoami-route
+spec:
+  entryPoints:
+  - web
+  routes:
+  - match: Host(`whoami.coolops.cn`)
+    kind: Rule
+    services:
+      - name: whoami
+        port: 80 
+```
+* 6.定义入口点（端口号和对应的端口名称）
+启动 Traefik 时会定义入口点（端口号和对应的端口名称），这时 Kubernetes 集群外部就可以通过访问 Traefik 服务器地址和配置的入口点对 Traefik 服务进行访问。在访问时一般会带上“域名”+“入口点端口”，然后 Traefik 会根据域名和入口点端口在 Traefik 路由规则表中进行匹配，如果匹配成功，则将流量发送到 Kubernetes 内部应用中与外界进行交互。其中，域名与入口点与对应后台服务关联的规则，即是 Traefik 路由规则。
 ### 组件
 ### 创建路由规则
 * 1.原生Ingress写法
